@@ -44,7 +44,7 @@ export default function Contact() {
 
             <div className="flex flex-col gap-6">
               {[
-                { icon: 'ri-mail-line', label: t("contact.email"), value: 'velamia_col@gmail.com' },
+                { icon: 'ri-mail-line', label: t("contact.email"), value: 'velamia.col@gmail.com' },
                 { icon: 'ri-instagram-line', label: t("contact.instagram"), value: '@velamiavela' },
                 { icon: 'ri-whatsapp-line', label: t("contact.whatsapp"), value: '+57 323 287 9452', href: 'https://wa.me/573232879452' },
                 { icon: 'ri-map-pin-line', label: t("contact.location"), value: t("contact.location.value") },
