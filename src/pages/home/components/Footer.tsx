@@ -7,16 +7,19 @@ export default function Footer() {
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Reemplaza ESTE_ID con tu ID de Formspree para newsletter
+  const NEWSLETTER_ENDPOINT = 'https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID';
+
   const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    const data = new URLSearchParams({ email });
+    const data = new FormData(e.currentTarget);
     try {
-      await fetch('https://readdy.ai/api/form/d7f6p9fimhg6tri2v5rg', {
+      await fetch(NEWSLETTER_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: data.toString(),
+        body: data,
+        headers: { 'Accept': 'application/json' },
       });
       setSubscribed(true);
     } catch {
@@ -41,11 +44,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {/* Left - Brand */}
           <div className="flex flex-col items-start">
-            <img
-              src="https://static.readdy.ai/image/74d0e45231b3fc4ae0501b2bf4ea35dd/f55d8f286982cc72b4405a9014abd498.png"
-              alt="Vela Mia Logo"
-              className="h-12 w-auto object-contain mb-3"
-            />
+            <div className="h-12 flex items-center mb-3">
+              <span className="font-serif text-2xl text-[#3a2a1e] font-medium">Vela Mia</span>
+            </div>
             <p className="text-[#8a7a6a] text-sm italic mb-4">{t("footer.brand.tagline")}</p>
             <p className="text-[#8a7a6a] text-xs leading-relaxed max-w-xs">
               {t("footer.brand.description")}
@@ -53,10 +54,8 @@ export default function Footer() {
             {/* Social */}
             <div className="flex items-center gap-4 mt-6">
               {[
-                { icon: 'ri-instagram-line', href: '#' },
-                { icon: 'ri-facebook-line', href: '#' },
-                { icon: 'ri-pinterest-line', href: '#' },
-                { icon: 'ri-tiktok-line', href: '#' },
+                { icon: 'ri-instagram-line', href: 'https://instagram.com/velamiavela' },
+                { icon: 'ri-whatsapp-line', href: 'https://wa.me/573232879452' },
               ].map((social) => (
                 <a
                   key={social.icon}
@@ -98,7 +97,6 @@ export default function Footer() {
               </div>
             ) : (
               <form
-                data-readdy-form
                 id="newsletter-form"
                 onSubmit={handleSubscribe}
                 className="flex w-full max-w-xs"

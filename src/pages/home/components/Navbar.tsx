@@ -34,11 +34,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
         <a href="#inicio" className="flex items-center gap-3 cursor-pointer">
-          <img
-            src="https://static.readdy.ai/image/74d0e45231b3fc4ae0501b2bf4ea35dd/f55d8f286982cc72b4405a9014abd498.png"
-            alt="Vela Mia Logo"
-            className="h-10 md:h-12 w-auto object-contain"
-          />
+          <span className="font-serif text-xl md:text-2xl text-[#3a2a1e] font-medium">Vela Mia</span>
         </a>
 
         {/* Desktop Nav */}

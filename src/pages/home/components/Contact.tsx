@@ -6,16 +6,19 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Reemplaza ESTE_ID con tu ID de Formspree (https://formspree.io)
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const form = e.currentTarget;
-    const data = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+    const data = new FormData(form);
     try {
-      await fetch('https://readdy.ai/api/form/d7f6p9fimhg6tri2v5s0', {
+      await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: data.toString(),
+        body: data,
+        headers: { 'Accept': 'application/json' },
       });
       setSubmitted(true);
     } catch {
@@ -42,7 +45,7 @@ export default function Contact() {
             <div className="flex flex-col gap-6">
               {[
                 { icon: 'ri-mail-line', label: t("contact.email"), value: 'velamia_col@gmail.com' },
-                { icon: 'ri-instagram-line', label: t("contact.instagram"), value: '@velamia_co' },
+                { icon: 'ri-instagram-line', label: t("contact.instagram"), value: '@velamiavela' },
                 { icon: 'ri-whatsapp-line', label: t("contact.whatsapp"), value: '+57 323 287 9452', href: 'https://wa.me/573232879452' },
                 { icon: 'ri-map-pin-line', label: t("contact.location"), value: t("contact.location.value") },
               ].map((item) => (
@@ -63,12 +66,11 @@ export default function Contact() {
             </div>
 
             {/* Image */}
-            <div className="mt-10 rounded-2xl overflow-hidden w-full h-[220px] md:h-[260px]">
-              <img
-                src="https://readdy.ai/api/search-image?query=artisan%20candle%20making%20workshop%2C%20hands%20crafting%20soy%20wax%20candles%2C%20natural%20light%2C%20warm%20tones%2C%20wooden%20table%2C%20botanical%20elements%2C%20cozy%20atmosphere%2C%20handmade%20craft%20studio%20Portugal&width=700&height=260&seq=contact-workshop-001&orientation=landscape"
-                alt="Atelier Vela Mia"
-                className="w-full h-full object-cover object-top"
-              />
+            <div className="mt-10 rounded-2xl overflow-hidden w-full h-[220px] md:h-[260px] bg-[#f5f0e8] flex items-center justify-center">
+              <div className="text-center px-6">
+                <i className="ri-store-3-line text-[#7a8c5e] text-4xl mb-3"></i>
+                <p className="text-[#8a7a6a] text-sm">Atelier Vela Mia</p>
+              </div>
             </div>
           </div>
 
@@ -84,7 +86,6 @@ export default function Contact() {
               </div>
             ) : (
               <form
-                data-readdy-form
                 id="contact-form"
                 onSubmit={handleSubmit}
                 className="bg-white rounded-2xl p-8 md:p-10 flex flex-col gap-5"
