@@ -22,6 +22,15 @@ export default function PrivacyPolicy() {
     { title: t("privacy.s6.title"), body: t("privacy.s6.text") },
     { title: t("privacy.s7.title"), body: t("privacy.s7.text") },
     { title: t("privacy.s8.title"), body: t("privacy.s8.text") },
+    {
+      title: t("privacy.s9.title"),
+      body: [
+        t("privacy.s9.p1"),
+        t("privacy.s9.p2"),
+        t("privacy.s9.p3"),
+        t("privacy.s9.p4"),
+      ],
+    },
   ];
 
   return (

@@ -138,6 +138,12 @@ export default function Footer() {
               >
                 {t("footer.legal.privacy")}
               </Link>
+              <Link
+                to="/terms"
+                className="text-[#8a7a6a] text-sm hover:text-[#7a8c5e] transition-colors duration-200 cursor-pointer"
+              >
+                {t("footer.legal.terms")}
+              </Link>
             </nav>
           </div>
         </div>

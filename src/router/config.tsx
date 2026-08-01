@@ -3,6 +3,7 @@ import NotFound from "../pages/NotFound";
 import Home from "../pages/home/page";
 import CookiePolicy from "../pages/CookiePolicy";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsOfService from "../pages/TermsOfService";
 
 const routes: RouteObject[] = [
   {
@@ -16,6 +17,10 @@ const routes: RouteObject[] = [
   {
     path: "/privacy-policy",
     element: <PrivacyPolicy />,
+  },
+  {
+    path: "/terms",
+    element: <TermsOfService />,
   },
   {
     path: "*",
