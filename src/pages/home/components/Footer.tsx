@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ export default function Footer() {
     <footer className="bg-[#faf7f2] border-t border-[#e8e0d5]">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
           {/* Left - Brand */}
           <div className="flex flex-col items-start">
             <div className="h-12 flex items-center mb-3">
@@ -119,6 +120,25 @@ export default function Footer() {
                 </button>
               </form>
             )}
+          </div>
+
+          {/* Legal */}
+          <div className="flex flex-col items-start md:items-center">
+            <h4 className="text-[#3a2a1e] text-sm font-semibold mb-5 tracking-wide">{t("footer.legal")}</h4>
+            <nav className="flex flex-col gap-3">
+              <Link
+                to="/cookies"
+                className="text-[#8a7a6a] text-sm hover:text-[#7a8c5e] transition-colors duration-200 cursor-pointer"
+              >
+                {t("footer.legal.cookies")}
+              </Link>
+              <Link
+                to="/privacy-policy"
+                className="text-[#8a7a6a] text-sm hover:text-[#7a8c5e] transition-colors duration-200 cursor-pointer"
+              >
+                {t("footer.legal.privacy")}
+              </Link>
+            </nav>
           </div>
         </div>
       </div>
