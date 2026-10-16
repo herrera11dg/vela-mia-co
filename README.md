@@ -10,12 +10,15 @@ Vela Mía es una iniciativa que busca ofrecer una experiencia digital intuitiva 
 
 - **Interfaz Web Responsiva:** Maquetación estructurada semánticamente para la presentación del catálogo de productos.
 - **Diseño Unificado:** Implementación de un sistema de diseño propio basado en tonos tierra, tipografías legibles y el modelo Flexbox para un layout limpio.
-- **Catálogo Interactivo:** Visualización de productos con precios, imágenes y enlace directo para encomendar.
-- **Galería tipo Instagram:** Filtro por categorías, interacción de "gostos" y lightbox para visualización ampliada.
+- **Catálogo Interactivo:** Visualización de 38 productos con precios en COP, imágenes y botón de agregar al carrito.
+- **Carrito de Compras:** Panel lateral con cantidades, eliminación de productos y total calculado.
+- **Galería tipo Instagram:** Filtro por categorías, interacción de "me gusta" y lightbox para visualización ampliada.
 - **Selección de Aromas:** 18 aromas naturales categorizados con descripciones y filtro dinámico.
 - **Formulario de Contacto:** Formulario funcional para envío de mensajes con selección de asunto.
 - **Newsletter:** Captura de emails para suscripción de noticias y ofertas exclusivas.
-- **Internacionalización:** Sistema de traducción listo para múltiples idiomas (i18n).
+- **Internacionalización:** Sistema de traducción completo en español e inglés (i18next).
+- **Políticas Legales:** Páginas de Política de Cookies, Política de Privacidad y Términos de Servicio.
+- **Banner de Cookies:** Modal de consentimiento con persistencia en localStorage.
 
 ## Tecnologías Utilizadas
 
@@ -24,7 +27,7 @@ Vela Mía es una iniciativa que busca ofrecer una experiencia digital intuitiva 
 - **Build Tool:** Vite 8
 - **Enrutamiento:** React Router DOM v7
 - **Internacionalización:** i18next + react-i18next
-- **Iconos:** Remixicon, Lucide React
+- **Iconos:** Remixicon
 - **Control de Versiones:** Git & GitHub
 
 ## Instrucciones de Ejecución
@@ -38,8 +41,8 @@ Vela Mía es una iniciativa que busca ofrecer una experiencia digital intuitiva 
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/herrera11dg/Vela-Mia.git
-   cd Vela-Mia
+   git clone https://github.com/herrera11dg/vela-mia-co.git
+   cd vela-mia-co
    ```
 
 2. Instala las dependencias:
@@ -68,9 +71,19 @@ Vela Mía es una iniciativa que busca ofrecer una experiencia digital intuitiva 
 
 ```
 src/
+├── components/
+│   ├── CookieConsent.tsx
+│   └── ShoppingCart.tsx
+├── context/
+│   ├── cart.ts
+│   └── CartProvider.tsx
+├── data/
+│   └── products.ts
 ├── i18n/
 │   ├── index.ts
 │   └── local/
+│       ├── es/translation.ts
+│       └── en/translation.ts
 ├── pages/
 │   ├── home/
 │   │   ├── components/
@@ -84,6 +97,9 @@ src/
 │   │   │   ├── Contact.tsx
 │   │   │   └── Footer.tsx
 │   │   └── page.tsx
+│   ├── CookiePolicy.tsx
+│   ├── PrivacyPolicy.tsx
+│   ├── TermsOfService.tsx
 │   └── NotFound.tsx
 ├── router/
 │   ├── config.tsx

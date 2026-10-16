@@ -3,40 +3,40 @@ import { useTranslation } from "react-i18next";
 
 export default function Gallery() {
   const { t } = useTranslation();
-  const [activeTag, setActiveTag] = useState('todos');
+  const [activeTag, setActiveTag] = useState('all');
   const [likedItems, setLikedItems] = useState<Set<number>>(new Set());
   const [lightboxItem, setLightboxItem] = useState<{ id: number; src: string; alt: string; caption: string; likes: number; tag: string } | null>(null);
 
-  const tagKeys = ['todos', 'proceso', 'ingredientes', 'colección', 'aromas', 'empaque', 'lifestyle'];
+  const tagKeys = ['all', 'process', 'ingredients', 'collection', 'aromas', 'packaging', 'lifestyle'];
 
   const galleryItems = [
     {
       id: 1,
       src: "https://readdy.ai/api/search-image?query=artisan%20hands%20pouring%20melted%20soy%20wax%20into%20glass%20jar%20candle%20mold%2C%20warm%20golden%20light%2C%20close%20up%20detail%20shot%2C%20natural%20textures%2C%20handmade%20candle%20making%20process%2C%20cream%20ivory%20background%2C%20rustic%20wooden%20table%2C%20craft%20workshop%20atmosphere%2C%20high%20quality%20photography&width=600&height=600&seq=gallery-vela-001&orientation=squarish",
-      alt: "Vertiendo cera de soja",
+      alt: t("gallery.alt.pouring"),
       caption: t("gallery.caption.pouring"),
       likes: 247,
-      tag: "proceso"
+      tag: "process"
     },
     {
       id: 2,
       src: "https://readdy.ai/api/search-image?query=dried%20botanicals%20flowers%20lavender%20rose%20petals%20arranged%20on%20white%20marble%20surface%20next%20to%20soy%20wax%20candle%2C%20flat%20lay%20photography%2C%20natural%20light%2C%20artisan%20candle%20ingredients%2C%20minimalist%20styling%2C%20soft%20pastel%20tones%2C%20handmade%20craft&width=600&height=600&seq=gallery-vela-002&orientation=squarish",
-      alt: "Ingredientes naturales y botánicos",
+      alt: t("gallery.alt.ingredients"),
       caption: t("gallery.caption.ingredients"),
       likes: 312,
-      tag: "ingredientes"
+      tag: "ingredients"
     },
     {
       id: 3,
       src: "https://readdy.ai/api/search-image?query=wooden%20wick%20being%20placed%20carefully%20into%20glass%20candle%20jar%20filled%20with%20creamy%20soy%20wax%2C%20artisan%20hands%20close%20up%2C%20warm%20workshop%20light%2C%20handmade%20candle%20making%2C%20natural%20materials%2C%20craft%20process%20detail%2C%20ivory%20cream%20tones&width=600&height=600&seq=gallery-vela-003&orientation=squarish",
-      alt: "Colocando la mecha de madera",
+      alt: t("gallery.alt.wick"),
       caption: t("gallery.caption.wick"),
       likes: 189,
-      tag: "proceso"
+      tag: "process"
     }
   ];
 
-  const filtered = activeTag === 'todos'
+  const filtered = activeTag === 'all'
     ? galleryItems
     : galleryItems.filter(item => item.tag === activeTag);
 
@@ -67,7 +67,9 @@ export default function Gallery() {
 
           {/* Instagram handle badge */}
           <a
-            href="#"
+            href="https://instagram.com/velamiavela"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 border border-[#d4c9bc] rounded-full text-sm text-[#6a5a4a] hover:border-[#7a8c5e] hover:text-[#7a8c5e] transition-all duration-300 cursor-pointer"
           >
             <i className="ri-instagram-line text-base"></i>
@@ -87,7 +89,7 @@ export default function Gallery() {
                   : 'bg-white border border-[#d4c9bc] text-[#6a5a4a] hover:border-[#7a8c5e] hover:text-[#7a8c5e]'
               }`}
             >
-               {t(`gallery.filter.${tag === 'todos' ? 'all' : tag}`)}
+               {t(`gallery.filter.${tag}`)}
             </button>
           ))}
         </div>

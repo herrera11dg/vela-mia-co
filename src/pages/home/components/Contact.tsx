@@ -5,24 +5,30 @@ export default function Contact() {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  // Reemplaza ESTE_ID con tu ID de Formspree (https://formspree.io)
+  // Reemplaza YOUR_FORM_ID con tu ID de Formspree (https://formspree.io)
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(false);
     const form = e.currentTarget;
     const data = new FormData(form);
     try {
-      await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' },
       });
-      setSubmitted(true);
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
     } catch {
-      setSubmitted(true);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -123,11 +129,11 @@ export default function Contact() {
                     className="w-full px-4 py-3 text-sm bg-[#faf7f2] border border-[#e8e0d5] rounded-xl text-[#3a2a1e] focus:outline-none focus:border-[#7a8c5e] transition-colors cursor-pointer"
                   >
                     <option value="">{t("contact.form.subject.placeholder")}</option>
-                    <option value="encomenda">{t("contact.form.subject.order")}</option>
-                    <option value="informacao">{t("contact.form.subject.info")}</option>
-                    <option value="presente">{t("contact.form.subject.gift")}</option>
-                    <option value="parceria">{t("contact.form.subject.partnership")}</option>
-                    <option value="outro">{t("contact.form.subject.other")}</option>
+                    <option value="pedido">{t("contact.form.subject.order")}</option>
+                    <option value="informacion">{t("contact.form.subject.info")}</option>
+                    <option value="regalo">{t("contact.form.subject.gift")}</option>
+                    <option value="asociacion">{t("contact.form.subject.partnership")}</option>
+                    <option value="otro">{t("contact.form.subject.other")}</option>
                   </select>
                 </div>
 
@@ -151,6 +157,10 @@ export default function Contact() {
                 >
                   {loading ? t("contact.form.sending") : t("contact.form.submit")}
                 </button>
+
+                {error && (
+                  <p className="text-sm text-red-500 text-center">{t("contact.form.error")}</p>
+                )}
               </form>
             )}
           </div>

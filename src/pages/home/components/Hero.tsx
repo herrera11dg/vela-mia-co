@@ -11,7 +11,7 @@ export default function Hero() {
             {t("hero.badge")}
           </span>
           <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-[#3a2a1e] leading-tight mb-4">
-            Vela Mia
+            {t("hero.title")}
           </h1>
           <p className="font-serif text-lg md:text-xl text-[#7a6a5a] italic font-light mb-8 leading-relaxed">
             {t("hero.subtitle")}

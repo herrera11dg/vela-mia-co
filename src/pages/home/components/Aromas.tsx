@@ -1,44 +1,37 @@
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
 
 const aromas = [
-  { id: 1, name: 'Maracuyá', icon: 'ri-sun-line', category: 'Tropical', color: '#f5a623', desc: 'Fresco y exótico, evoca veranos tropicales y energía vibrante.' },
-  { id: 2, name: 'Sandía', icon: 'ri-drop-line', category: 'Frutal', color: '#e85d75', desc: 'Dulce y refrescante, perfecto para días calurosos y momentos de ligereza.' },
-  { id: 3, name: 'Frutos Rojos', icon: 'ri-heart-line', category: 'Frutal', color: '#c0392b', desc: 'Una mezcla intensa de frambuesa, fresa y arándano silvestre.' },
-  { id: 4, name: 'Verbena', icon: 'ri-leaf-line', category: 'Herbal', color: '#7a8c5e', desc: 'Herbal y cítrico, limpia el ambiente y traz frescura al hogar.' },
-  { id: 5, name: 'Eucalipto', icon: 'ri-plant-line', category: 'Herbal', color: '#4a7c6f', desc: 'Purificante y revigorante, ideal para momentos de relajación profunda.' },
-  { id: 6, name: 'Menta', icon: 'ri-contrast-drop-line', category: 'Herbal', color: '#2ecc71', desc: 'Fresco y estimulante, despierta los sentidos y aclara la mente.' },
-  { id: 7, name: 'Limón', icon: 'ri-sun-foggy-line', category: 'Cítrico', color: '#f1c40f', desc: 'Cítrico y alegre, traz luz y buen humor a cualquier habitación.' },
-  { id: 8, name: 'Chocolate', icon: 'ri-cup-line', category: 'Gourmand', color: '#6b3a2a', desc: 'Caliente y envolvente, como un abrazo en forma de aroma.' },
-  { id: 9, name: 'Kiwi', icon: 'ri-seedling-line', category: 'Tropical', color: '#8bc34a', desc: 'Ácido y fresco, una explosión de vitalidad y naturaleza.' },
-  { id: 10, name: 'Mango', icon: 'ri-sun-line', category: 'Tropical', color: '#ff8c00', desc: 'Dulce y tropical, te transporta a playas paradisíacas.' },
-  { id: 11, name: 'Talco de Bebé', icon: 'ri-cloud-line', category: 'Suave', color: '#d4a5c9', desc: 'Delicado y reconfortante, evoca ternura y momentos de paz.' },
-  { id: 12, name: 'Brisas Marinas', icon: 'ri-sailboat-line', category: 'Aquático', color: '#5b9bd5', desc: 'Fresco y salado, como una brisa del océano al amanecer.' },
-  { id: 13, name: 'Bergamota', icon: 'ri-sparkling-line', category: 'Cítrico', color: '#c8a951', desc: 'Elegante y sofisticado, con notas cítricas y florales únicas.' },
-  { id: 14, name: 'Café', icon: 'ri-cup-fill', category: 'Gourmand', color: '#5c3d2e', desc: 'Intenso y acogedor, el aroma perfecto para mañanas especiales.' },
-  { id: 15, name: 'Vainilla', icon: 'ri-star-line', category: 'Gourmand', color: '#d4a96a', desc: 'Dulce y aterciopelado, crea una atmósfera cálida y acogedora.' },
-  { id: 16, name: 'Bayas Navideñas', icon: 'ri-gift-line', category: 'Natal', color: '#8b1a1a', desc: 'Bayas rojas y especias, el espíritu navideño en cada llama.' },
-  { id: 17, name: 'Dulce de Navidad', icon: 'ri-snowflake-line', category: 'Natal', color: '#b5651d', desc: 'Canela, naranja y vainilla — la magia de Navidad en forma de aroma.' },
-  { id: 18, name: 'Citronela', icon: 'ri-bug-line', category: 'Herbal', color: '#9acd32', desc: 'Natural y refrescante, aleja insectos mientras perfuma el ambiente.' },
+  { id: 1, cat: 'tropical', nameKey: 'aromas.data.1.name', descKey: 'aromas.data.1.desc', icon: 'ri-sun-line', color: '#f5a623' },
+  { id: 2, cat: 'frutal', nameKey: 'aromas.data.2.name', descKey: 'aromas.data.2.desc', icon: 'ri-drop-line', color: '#e85d75' },
+  { id: 3, cat: 'frutal', nameKey: 'aromas.data.3.name', descKey: 'aromas.data.3.desc', icon: 'ri-heart-line', color: '#c0392b' },
+  { id: 4, cat: 'herbal', nameKey: 'aromas.data.4.name', descKey: 'aromas.data.4.desc', icon: 'ri-leaf-line', color: '#7a8c5e' },
+  { id: 5, cat: 'herbal', nameKey: 'aromas.data.5.name', descKey: 'aromas.data.5.desc', icon: 'ri-plant-line', color: '#4a7c6f' },
+  { id: 6, cat: 'herbal', nameKey: 'aromas.data.6.name', descKey: 'aromas.data.6.desc', icon: 'ri-contrast-drop-line', color: '#2ecc71' },
+  { id: 7, cat: 'citrico', nameKey: 'aromas.data.7.name', descKey: 'aromas.data.7.desc', icon: 'ri-sun-foggy-line', color: '#f1c40f' },
+  { id: 8, cat: 'gourmand', nameKey: 'aromas.data.8.name', descKey: 'aromas.data.8.desc', icon: 'ri-cup-line', color: '#6b3a2a' },
+  { id: 9, cat: 'tropical', nameKey: 'aromas.data.9.name', descKey: 'aromas.data.9.desc', icon: 'ri-seedling-line', color: '#8bc34a' },
+  { id: 10, cat: 'tropical', nameKey: 'aromas.data.10.name', descKey: 'aromas.data.10.desc', icon: 'ri-sun-line', color: '#ff8c00' },
+  { id: 11, cat: 'suave', nameKey: 'aromas.data.11.name', descKey: 'aromas.data.11.desc', icon: 'ri-cloud-line', color: '#d4a5c9' },
+  { id: 12, cat: 'acuatico', nameKey: 'aromas.data.12.name', descKey: 'aromas.data.12.desc', icon: 'ri-sailboat-line', color: '#5b9bd5' },
+  { id: 13, cat: 'citrico', nameKey: 'aromas.data.13.name', descKey: 'aromas.data.13.desc', icon: 'ri-sparkling-line', color: '#c8a951' },
+  { id: 14, cat: 'gourmand', nameKey: 'aromas.data.14.name', descKey: 'aromas.data.14.desc', icon: 'ri-cup-fill', color: '#5c3d2e' },
+  { id: 15, cat: 'gourmand', nameKey: 'aromas.data.15.name', descKey: 'aromas.data.15.desc', icon: 'ri-star-line', color: '#d4a96a' },
+  { id: 16, cat: 'natal', nameKey: 'aromas.data.16.name', descKey: 'aromas.data.16.desc', icon: 'ri-gift-line', color: '#8b1a1a' },
+  { id: 17, cat: 'natal', nameKey: 'aromas.data.17.name', descKey: 'aromas.data.17.desc', icon: 'ri-snowflake-line', color: '#b5651d' },
+  { id: 18, cat: 'herbal', nameKey: 'aromas.data.18.name', descKey: 'aromas.data.18.desc', icon: 'ri-bug-line', color: '#9acd32' },
 ];
 
-const categoryKeys = ['todos', 'tropical', 'frutal', 'herbal', 'citrico', 'gourmand', 'suave', 'aquatico', 'natal'];
-
-import { useTranslation } from "react-i18next";
+const categoryKeys = ['todos', 'tropical', 'frutal', 'herbal', 'citrico', 'gourmand', 'suave', 'acuatico', 'natal'];
 
 export default function Aromas() {
   const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState('Todos');
+  const [activeCategory, setActiveCategory] = useState('todos');
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-
-  const catMap: Record<string, string> = {
-    todos: 'Todos', tropical: 'Tropical', frutal: 'Frutal', herbal: 'Herbal',
-    citrico: 'Cítrico', gourmand: 'Gourmand', suave: 'Suave',
-    aquatico: 'Acuático', natal: 'Natal'
-  };
 
   const filtered = activeCategory === 'todos'
     ? aromas
-    : aromas.filter((a) => a.category === catMap[activeCategory]);
+    : aromas.filter((a) => a.cat === activeCategory);
 
   return (
     <section id="aromas" className="bg-[#faf7f2] py-24 md:py-32">
@@ -96,14 +89,14 @@ export default function Aromas() {
               </div>
 
               {/* Name */}
-              <h3 className="font-serif text-[#3a2a1e] text-sm font-medium leading-tight mb-1">{aroma.name}</h3>
+              <h3 className="font-serif text-[#3a2a1e] text-sm font-medium leading-tight mb-1">{t(aroma.nameKey)}</h3>
 
               {/* Category badge */}
               <span
                 className="text-[10px] font-medium px-2 py-0.5 rounded-full mb-2"
                 style={{ backgroundColor: `${aroma.color}18`, color: aroma.color }}
               >
-                {aroma.category}
+                {t(`aromas.filter.${aroma.cat}`)}
               </span>
 
               {/* Hover description */}
@@ -118,8 +111,8 @@ export default function Aromas() {
                 >
                   <i className={`${aroma.icon} text-xl`} style={{ color: aroma.color }} />
                 </div>
-                <h4 className="font-serif text-[#3a2a1e] text-sm font-semibold mb-2">{aroma.name}</h4>
-                <p className="text-[#8a7a6a] text-xs leading-relaxed">{aroma.desc}</p>
+                <h4 className="font-serif text-[#3a2a1e] text-sm font-semibold mb-2">{t(aroma.nameKey)}</h4>
+                <p className="text-[#8a7a6a] text-xs leading-relaxed">{t(aroma.descKey)}</p>
               </div>
             </div>
           ))}

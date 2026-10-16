@@ -7,24 +7,30 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  // Reemplaza ESTE_ID con tu ID de Formspree para newsletter
+  // Reemplaza YOUR_NEWSLETTER_FORM_ID con tu ID de Formspree para newsletter
   const NEWSLETTER_ENDPOINT = 'https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID';
 
   const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
+    setError(false);
     const data = new FormData(e.currentTarget);
     try {
-      await fetch(NEWSLETTER_ENDPOINT, {
+      const res = await fetch(NEWSLETTER_ENDPOINT, {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' },
       });
-      setSubscribed(true);
+      if (res.ok) {
+        setSubscribed(true);
+      } else {
+        setError(true);
+      }
     } catch {
-      setSubscribed(true);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -119,6 +125,9 @@ export default function Footer() {
                   <i className="ri-arrow-right-line text-sm"></i>
                 </button>
               </form>
+            )}
+            {error && (
+              <p className="text-xs text-red-500 mt-2">{t("footer.newsletter.error")}</p>
             )}
           </div>
 
