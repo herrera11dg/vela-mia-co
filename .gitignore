@@ -9,3 +9,4 @@ out/
 Thumbs.db
 *.tsbuildinfo
 auto-imports.d.ts
+__pycache__/
