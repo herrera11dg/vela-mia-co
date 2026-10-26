@@ -7,8 +7,8 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:5000",
     headless: true,
-    viewport: { width: 1280, height: 720 },
-    video: { mode: "on", size: { width: 1280, height: 720 } },
+    viewport: { width: 1280, height: 900 },
+    video: { mode: "on", size: { width: 1280, height: 900 } },
   },
   outputDir: "./test-video",
   reporter: [["list"]],
