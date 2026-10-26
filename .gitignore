@@ -10,3 +10,6 @@ Thumbs.db
 *.tsbuildinfo
 auto-imports.d.ts
 __pycache__/
+capturas/
+test-results/
+playwright-report/
